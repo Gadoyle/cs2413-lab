@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(void) {
-    printf("CS2314 Lab00 Starter Demo\n");
+    printf("CS2413 Lab00 Starter Demo\n");
 
     // TODO: Replace the placeholder information below
     printf("Name: YOUR_NAME_HERE\n");
