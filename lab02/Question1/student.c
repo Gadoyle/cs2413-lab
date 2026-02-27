@@ -1,3 +1,4 @@
+
 // Question1/Student.c
 // ------------------------------------------------------------
 // CS Lab - Valid Parentheses (STACK PRACTICE)
@@ -29,6 +30,24 @@
 #include <stddef.h>  // size_t
 #include <string.h>  // strlen
 
+#define StackSize 100
+
+typedef struct {
+        char arr[StackSize];
+        int top;
+        } Stack;
+
+void initialize(Stack *stack){
+        stack->top = -1;}
+
+void push(Stack *stack, char value) {stack->arr[++stack->top] = value;}
+
+char pop(Stack *stack) {char popped = stack->arr[stack->top]; stack->top--; return popped;}
+
+bool isEmpty(Stack *stack) {return stack->top == -1;}
+
+char peek(Stack *stack) {return stack->arr[stack->top];}
+
 bool isValid(const char *s) {
     // TODO: Implement using a stack.
     //
@@ -45,7 +64,7 @@ bool isValid(const char *s) {
     // Helpful matching pairs:
     //   ')' matches '('
     //   ']' matches '['
-    //   '}' matches '{'
+    //   '}' matches '{'void push(Stack *stack, char '('){return;}
     //
     // Corner cases:
     // - s == NULL -> return false
@@ -53,7 +72,44 @@ bool isValid(const char *s) {
     //
     // Note:
     // - Input contains only bracket characters, per the prompt.
-
-    (void)s; // remove after implementing
-    return false; // placeholder
+	int Size = strlen(s);
+	int a=0;
+	Stack stack;
+	initialize(&stack);
+	if(s == NULL) {return false;}
+	for(a = 0; a < Size; a++)
+	{
+		if(s[a] == '(')
+		{
+			push(&stack, '(');
+		}
+		if(s[a] == '[')
+                {
+                        push(&stack, '[');
+                }
+		if(s[a] == '{')
+                {
+                        push(&stack, '{');
+                }
+		if(s[a] == ')')
+                {
+                        if(isEmpty(&stack)) {return false;}
+			else if(peek(&stack) != '(') {return false;}
+			else {pop(&stack);}
+                }
+		if(s[a] == '}')
+                {
+                        if(isEmpty(&stack)) {return false;}
+                        else if(peek(&stack) != '{') {return false;}
+                        else {pop(&stack);}
+                }
+		if(s[a] == ']')
+                {
+                        if(isEmpty(&stack)) {return false;}
+                        else if(peek(&stack) != '[') {return false;}
+                        else {pop(&stack);}
+                }
+	}
+	if(!isEmpty(&stack)) {return false;}
+    return true; // placeholder
 }
