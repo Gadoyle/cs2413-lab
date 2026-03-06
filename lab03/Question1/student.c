@@ -16,15 +16,36 @@
  * struct ListNode {
  *     int val;
  *     struct ListNode *next;
- * };
- */
+ * }; */
 
 #include "student.h"
 
 struct ListNode* reverseList(struct ListNode* head) {
-    // TODO: implement
-    // Hints (optional):
-    // - Keep track of previous and current pointers.
-    // - Iterate until current becomes NULL.
+	int num=0;
+	struct ListNode* Current1 = head;
+	struct ListNode* Beginning = head;
+	int a = 0;
+	int b = 0;
+	int c = 0;
+	int BegVal = 0;
+	int EndVal = 0;
 
+	while (Current1 != NULL) {num++; Current1 = Current1->next;}
+	c = num;
+	for(a=num / 2; a>0; a--)
+	{
+		struct ListNode* End = head;
+		for(b=c; b>1; b--)
+		{
+			End = End->next;
+		}
+		EndVal = End->val;
+		BegVal = Beginning->val;
+		End->val = BegVal;
+		Beginning->val = EndVal;
+		Beginning = Beginning->next;
+		c--;
+	}
+	return head;
 }
+
